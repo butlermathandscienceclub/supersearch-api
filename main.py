@@ -7,6 +7,7 @@ def main():
 	d= request.args.get("dark")
 	s = request.args.get("search") ;
 	r = get_results(s)
+	print(s)
 	style= """
 	text-align:center;
 	"""
@@ -18,12 +19,21 @@ def main():
 	for i in r:
 		s += (f"<a href=\"{i}\" target=\"_blank\" >{i}</a><br>")
 	s+="</div>"
-	l = """<div style="
+	l = """	<style>:root{color:black}</style><div style="
 	text-align:center;
 	"><h1>results</h1><br></div>"""
-	res = f'{s if s != l else "no results"}'
+	l2 = """	<style>:root{color:white; background-color:black;}</style><div style="
+	text-align:center;
+	"><h1>results</h1><br></div>"""
+
+	res = f'{ s if s != l else "<h1>no results</h1>"}'
+	if s == l2 :
+		res = """<style>:root{color:white; background-color:black;}</style><div style="
+	text-align:center;
+	"><h1>no results</h1><br></div>"""
 	print(res)
-	return f'{s if s != l else "no results"}'
+
+	return res
 
 @app.route('/new', methods=['GET', 'POST'])
 def r2():
