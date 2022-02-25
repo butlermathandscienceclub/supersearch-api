@@ -27,6 +27,7 @@ def main():
 	"><h1>results</h1><br></div>"""
 
 	res = f'{ s if s != l else "<h1>no results</h1>"}'
+	res += "<br> <a href=\"/redir\">make another search</a>"
 	if s == l2 :
 		res = """<style>:root{color:white; background-color:black;}</style><div style="
 	text-align:center;
@@ -42,8 +43,9 @@ def r2():
 		url = request.args.get("url")
 		x=new2(url, *s)
 		return f'{x} '
-
-	
+@app.route('/redir')
+def redir():
+	return"<script>window.location.href = (\"https://s-ui.kellanb.repl.co\")</script>"	
 
 
 app.run(host='0.0.0.0', port=8080)
